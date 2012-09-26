@@ -1,0 +1,16 @@
+<% remote_form_for :user, @user, :url => user_create_path do |f| %>
+  <h1>Not a member yet? Sign Up!</h1>
+  <div id="errors_div_user">
+    <%= render :partial => "layouts/errors", :locals => {:object => @user_session}%>
+  </div>
+  <label class="grey" for="signup">Username:</label>
+  <%= f.text_field :username, :class=>"field", :size => "23" %>
+  <label class="grey" for="signup">Email:</label>
+  <%= f.text_field :email, :class=>"field", :size => "23" %>
+  <label class="grey" for="signup">Password:</label>
+  <%= f.password_field :password, :class=>"field", :size => "23" %>
+  <label class="grey" for="signup">Password Confirmation:</label>
+  <%= f.password_field :password_confirmation, :class=>"field", :size => "23" %>
+  <label>An e-mail for activation will be sent to you.</label>
+  <input type="submit" name="submit" value="Register" class="bt_register" />
+<% end %>

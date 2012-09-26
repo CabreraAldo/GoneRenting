@@ -1,0 +1,12 @@
+<h1>Welcome to GoneRenting!</h1>
+<h2>Group Renting Made Easy!</h2>
+<p class="grey">- Create A Custom Page For Your Group's Rental!</p>
+<p class="grey">- Track Bill Payments and Send Reminders to Pay Them!</p>
+<p class="grey">- Easy to Use and Great for College and Vacation Rentals!</p>
+<%= fb_connect_async_js %>
+<% if current_facebook_user && current_facebook_user.fetch %>
+  <%= fb_login_and_redirect(oauth_callback_url, :perms => User::FACEBOOK_SCOPE, :display => 'popup') %>
+  <%= " as #{current_facebook_user.first_name} #{current_facebook_user.last_name} (" + fb_logout_link("change account?", request.url) + ")" %>
+<% else %>
+  <%= fb_login_and_redirect(oauth_callback_url, :perms => User::FACEBOOK_SCOPE, :display => 'popup') %>
+<% end %>

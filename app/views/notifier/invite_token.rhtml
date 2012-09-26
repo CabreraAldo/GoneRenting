@@ -1,0 +1,28 @@
+<%= @user.username %> has invited you to a GoneRenting portal at <%= link_to "http://#{SITE_URL}","http://#{SITE_URL}" %>.
+
+<br/><br/>
+
+Follow the link to get access to portal: <b><%= @portal.name %></b>, on GoneRenting.
+
+<br/><br/>
+
+Click the link below to accept this invitation.
+<br/>
+<%= link_to @url, @url %>
+
+<br/><br/>
+
+You will be given the option to create a new GoneRenting user profile or
+choose an existing one for this invitation.
+
+<br/><br/>
+
+Be well,
+<br/>
+The GoneRenting Team
+
+<br/><br/>
+
+<hr></hr>
+
+If you have questions, e-mail us at <a href="mailto:support@gonerenting.com">support@gonerenting.com</a>

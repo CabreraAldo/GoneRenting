@@ -1,0 +1,112 @@
+<%= f.hidden_field :user_id, :value => current_user.id %>
+
+<% unless @only_pictures_edit and @only_pictures_edit == "true" %>
+
+  <div style="width: 100%;float: left;padding: 10px;">
+    <div style="width: 100%;float: left;margin-top: 5px;">
+      <div style="float: left; width: 200px;">
+        Name of the Portal
+      </div>
+      <div style="float: left; width: 400px;">
+        <%= f.text_field :name, :style => "width:440px;" %>
+      </div>
+    </div>
+
+    <div style="width: 100%;float: left;margin-top: 5px;">
+      <div style="float: left; width: 200px;">
+        Description
+      </div>
+      <div style="float: left; width: 400px;">
+        <%= f.text_area :description, :size => "60x3" %>
+      </div>
+    </div>
+
+
+    <div style="width: 100%;float: left;margin-top: 5px;">
+      <div style="float: left; width: 200px;">
+        Tell us amenities: <br/>
+        (How many rooms, <br/>
+        Bathrooms, <br/>
+        close to the Beach?)
+      </div>
+      <% f.fields_for :amenities do |amenity| %>
+        <div style="float: left; width: 220px;margin-top: 2px;">
+          <%= amenity.text_field :name , :style => "width:210px;"%>
+        </div>
+      <% end %>
+    </div>
+
+    <div style="width: 100%;float: left;margin-top: 5px;">
+      <div style="float: left; width: 200px;">
+        Street Address
+      </div>
+      <div style="float: left; width: 400px;">
+        <%= f.text_field :street_address %>
+      </div>
+    </div>
+
+    <div style="width: 100%;float: left;margin-top: 5px;">
+      <div style="float: left; width: 200px;">
+        City
+      </div>
+      <div style="float: left; width: 400px;">
+        <%= f.text_field :city %>
+      </div>
+    </div>
+
+    <div style="width: 100%;float: left;margin-top: 5px;">
+      <div style="float: left; width: 200px;">
+        State
+      </div>
+      <div style="float: left; width: 400px;">
+        <%= f.text_field :state %>
+      </div>
+    </div>
+
+    <div style="width: 100%;float: left;margin-top: 5px;">
+      <div style="float: left; width: 200px;">
+        Zip Code
+      </div>
+      <div style="float: left; width: 400px;">
+        <%= f.text_field :zip %>
+      </div>
+    </div>
+
+    <div style="width: 100%;float: left;margin-top: 5px;">
+      <div style="float: left; width: 200px;">
+        Is this for a University Home, Vacation Home, or Other?
+      </div>
+      <div style="float: left; width: 400px;">
+        <%= select_tag "portal[for_what]", options_for_select([[ "University","University"],["Vacation" , "Vacation"] , ["Rental" , "Rental"], ["Other" , "Other"]], @portal.for_what)   %>
+      </div>
+    </div>
+
+  <% end %>
+
+  <div style="width: 100%;float: left;margin-top: 5px;">
+    <div style="float: left; width: 200px;margin-top: 10px;">
+      Upload upto 5 Pictures <br/>
+      of your home. Pictures could <br/>
+      be of you Home, Dog or Friends <br/>
+      living in the house! <br/>
+      (5 Max Pics, 5 MB Max Size, JPEG, <br/>
+      BMP, PNG and GIF Only!)<br/>
+    </div>
+    <div style="float: left; width: 400px;margin-top: 10px;">
+      <% f.fields_for :avatars do |avatar| %>
+        <% if avatar.object.new_record? %>
+          <div style="float: left; width: 400px;margin-top: 10px;">
+            <%= avatar.file_field :photo %>
+          </div>
+        <% else %>
+          <div style="float:left;width:190px;margin-top: 10px; ">
+            <%= link_to( image_tag(avatar.object.photo.url(:small) ), avatar.object.photo.url(:original) ) %>
+            Delete: <%= avatar.check_box :_destroy %>
+          </div>
+        <% end %>
+
+      <% end %>
+    </div>
+  </div>
+
+</div>

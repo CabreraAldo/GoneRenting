@@ -1,0 +1,36 @@
+<%= render :partial => 'accept_invite_tabs' %>
+
+
+<% form_for @user_session, :url => invite_token_create_user_session_path(:portal_id => @portal.id, :token => @invite_token.token) do |f| %>
+  <%= f.error_messages %>
+  <div style="width: 100%;float: left;">
+    <h4>
+      I want to accept this invitation by using my email address and password  as This is my first time using Platypus or I would like to create a new profile.
+    </h4>
+  </div>
+  <div style="width:100%;float: left;padding-left: 50px;">
+    <div style="width:150px;float: left;">
+      <%= f.label :username %>
+    </div>
+    <div style="width:750px;float: left;margin-bottom: 5px;">
+      <%= f.text_field :username %>
+    </div>
+    <div style="width:150px;float: left;">
+      <%= f.label :password %>
+    </div>
+    <div style="width:750px;float: left;margin-bottom: 15px;">
+      <%= f.password_field :password %>
+    </div>
+    <div style="width:150px;float: left;">
+      <%= f.label :remember %>
+    </div>
+    <div style="width:750px;float: left;margin-bottom: 15px;">
+      <%= f.check_box :remember_me %>
+    </div>
+
+    <br /><br />
+    <div style="width:750px;float: left;margin-bottom: 5px;text-align: center;">
+      <%= f.submit "Login & accept invitation", :style => "background-color: lightslategrey;width: 240px;color: white;" %>
+    </div>
+  </div>
+<% end %>

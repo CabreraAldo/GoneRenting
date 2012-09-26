@@ -1,0 +1,45 @@
+<div style="float: left;width: 100%;">
+  <%  if !@comments.blank? %>
+    <% @comments.each do |comment| %>
+      <div id="show_comments_main_div_<%= comment.id %>" style="padding: 5px;margin-bottom: 5px;border: 1px solid silver;width: 98%;float: left;background-color: #eee;">
+        <div style="float: left;width: 30px;margin-top: 3px;">
+          <% unless User.find_by_id(comment.user_id).facebook_uid.nil? %>
+            <%= fb_profile_pic(comment.user.facebook_uid, {:size => 'square' }) %>
+          <% else %>
+            <%= image_tag "missing.png" %>
+          <% end %>
+        </div>
+        <div id="show_comments_edit_pannel_<%= comment.id %>" style="float: right;margin-right: 5px;width: auto;">
+          <% if current_user.id == comment.user_id %>
+            <%= link_to_remote image_tag("edit.jpeg", :style => "width:10px;height:10px;"), :url =>  edit_comment_path(:id => @portal.id, :comment_id => comment.id) %>
+            <%= link_to_remote image_tag("delete.gif", :style => "width:10px;height:10px;"), :url => destroy_comment_path(:id => @portal.id, :comment_id => comment.id,:class_name => @portal.class), :confirm => "Are you sure?" %>
+          <% end %>
+        </div>
+        <div style="float: left;width: 380px;text-align: left;margin-left: 5px;">
+          <%= comment.comment %>
+        </div>
+        <div style="float: left;width: 100%;text-align: right;font-style: normal;font-size: 12px;">
+          Added By &nbsp;<%= (User.find_by_id(comment.user_id)).username %>
+        </div>
+      </div>
+      <script>
+        $('#show_comments_edit_pannel_<%= comment.id %>').hide();
+        $('#show_comments_main_div_<%= comment.id %>').hover(
+        function () {
+          $('#show_comments_edit_pannel_<%= comment.id %>').show();
+        },
+        function () {
+          $('#show_comments_edit_pannel_<%= comment.id %>').hide();
+        }
+      );
+
+
+      </script>
+    <%end%>
+  <%else%>
+    <div style="padding: 5px;margin-bottom: 5px;border: 1px solid silver;width: 98%;float: left;background-color: #eee;">
+      No comment found !
+    </div>
+  <%end%>
+
+</div>

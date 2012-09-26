@@ -1,0 +1,65 @@
+<div style="width:100%;float: left;">
+  <%= render :partial => "welcome/header" %>
+  <h2>
+    Portal <b style="color: silver;"><%= @portal.name %></b> Dashboard - Administrator    
+  </h2>
+</div>
+<span style="float: right;margin-right: 32px;margin-top: -100px;">
+  <%= link_to 'View the Portal', comments_path(:id => @portal.id, :class_name=>@portal.class) %>
+</span>
+
+
+<div style="width: 100%;float: left;">
+  <div class="dashboard_box">
+    <span>
+      <% if @portal.is_owner?(current_user) %>
+        <%= link_to 'Invite/ Remove Portal Users', new_invite_token_path(:portal_id => @portal.id) %>
+      <% else %>
+        Invite/ Remove Portal Users
+      <%end%>
+    </span>
+  </div>
+  <div class="dashboard_box">
+    <span>
+      <% if @portal.is_owner?(current_user) %>
+        <%= link_to 'Add/ Remove/ Modify Bills', bills_path(:id => @portal.id) %>
+      <% else %>
+        Add/ Remove/ Modify Bills
+      <% end %>
+    </span>
+  </div>
+  <div class="dashboard_box">
+    <span>
+
+      <%= link_to 'Add/ Remove/ Modify Comments', comments_path(:id => @portal.id, :class_name=>@portal.class) %>
+
+    </span>
+  </div>
+  <!--  <div class="dashboard_box">
+      <span>
+  <% if @portal.is_owner?(current_user) %>
+    <%= link_to 'Add/ Remove/ Modify Pictures', edit_portal_path(@portal,:only_pictures_edit => "true") %>
+  <% else %>
+                  Add/ Remove/ Modify Pictures
+  <% end %>
+      </span>
+    </div>
+  -->
+  <div class="dashboard_box">
+    <span>
+      <% if @portal.is_owner?(current_user) %>
+        <%= link_to 'Add/ Remove/ Modify Portal Information', edit_portal_path(@portal) %>
+      <% else %>
+        Add/ Remove/ Modify Portal Information
+      <% end %>
+    </span>
+  </div>
+  <div class="dashboard_box" style="float: right;margin-top: 50px;height: 20px;width: 100px;">
+    <% if @portal.is_owner?(current_user) %>
+      <%= link_to 'Delete Portal', portal_path(@portal), :confirm => 'Are you sure?', :method => :delete %>
+    <% else %>
+      Delete Portal
+    <% end %>
+  </div>
+</div>
+

@@ -1,0 +1,52 @@
+<style>
+  table.jCalendar td.selected {
+    background: none repeat scroll 0 0 #FF6666;
+    color: #FFFFFF;
+  }
+  div.dp-popup td {
+    cursor: pointer;
+  }
+  
+</style>
+<script>
+  $(function()
+  {
+    Date.format = 'yyyy-mm-dd';
+    $('.turn-me-into-datepicker').datePicker({
+      inline:true,
+      startDate:'1996-01-01',
+      selectMultiple:true
+
+    });
+  });
+</script>
+<div style="float: left;width: 100%;padding: 5px;text-align: center;">
+  <div style="text-align: center;margin-left: 20px;" class="turn-me-into-datepicker"></div>
+</div>
+<div style="float: left;width: 100%;padding: 5px;">
+  <div style="background-color: wheat;border-bottom: 1px solid gray;font-weight: bold;margin-right: 15px;padding: 5px;">
+    <b>
+      Name | Amount Due | Date Date
+    </b>
+  </div>
+  <% unless current_user.due_bills(@portal).blank? %>
+    <% current_user.due_bills(@portal).each do|bill_user|%>
+      <div style="border-bottom: 1px solid gray;font-weight: bold;margin-right: 15px;padding: 5px;">
+        -&nbsp;<%= bill_user.bill.name %>&nbsp;|&nbsp;$<%= bill_user.bill.amount.to_f %>&nbsp;|&nbsp;<%= bill_user.bill.due.strftime("%m/%d/%Y") %>
+      </div>
+      <script>
+        $(function()
+        {
+          $('.turn-me-into-datepicker').dpSetSelected('<%= bill_user.bill.due.strftime('%Y-%m-%d') %>');
+        });
+      </script>
+    <% end %>
+  <%else%>
+    <div style="border-bottom: 1px solid gray;font-weight: bold;margin-right: 15px;padding: 5px;">
+      No Bill is due.
+    </div>
+  <% end %>
+</div>
+<div style="float: left;width: 95%;border: 1px solid silver;height :350px;margin: 5px;">
+  <%= render :partial => "/tasks/new_task" %>
+</div>

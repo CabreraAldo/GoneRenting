@@ -1,0 +1,38 @@
+<div style="float: left;width: 100%;">
+  <%  if !@tasks.blank? %>
+    <% @tasks.each do |task| %>
+      <div id="show_tasks_main_div_<%= task.id %>" style="padding: 5px;margin-bottom: 5px;border: 1px solid silver;width: 98%;float: left;background-color: #eee;">
+        <div id="show_tasks_edit_pannel_<%= task.id %>" style="float: right;margin-right: 5px;width: auto;">
+          <% if current_user.id == task.user_id %>
+            <%= link_to_remote image_tag("edit.jpeg", :style => "width:10px;height:10px;"), :url =>  edit_task_path(:id => @portal.id, :task_id => task.id) %>
+            <%= link_to_remote image_tag("delete.gif", :style => "width:10px;height:10px;"), :url => destroy_task_path(:id => @portal.id, :task_id => task.id,:class_name => @portal.class), :confirm => "Are you sure?" %>
+          <% end %>
+        </div>
+        <div style="float: left;width: 380px;text-align: left;margin-left: 5px;">
+          <%= task.name %>
+        </div>
+        <div style="float: left;width: 100%;text-align: right;font-style: normal;font-size: 12px;">
+          Added By &nbsp;<%= (User.find_by_id(task.user_id)).username %>
+        </div>
+      </div>
+      <script>
+        $('#show_tasks_edit_pannel_<%= task.id %>').hide();
+        $('#show_tasks_main_div_<%= task.id %>').hover(
+        function () {
+          $('#show_tasks_edit_pannel_<%= task.id %>').show();
+        },
+        function () {
+          $('#show_tasks_edit_pannel_<%= task.id %>').hide();
+        }
+      );
+
+
+      </script>
+    <%end%>
+  <%else%>
+    <div style="padding: 5px;margin-bottom: 5px;border: 1px solid silver;width: 98%;float: left;background-color: #eee;">
+      No task found !
+    </div>
+  <%end%>
+
+</div>

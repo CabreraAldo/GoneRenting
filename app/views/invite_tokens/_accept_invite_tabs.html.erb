@@ -1,0 +1,18 @@
+<h1>
+  Accept Invitation
+</h1>
+<h4>
+  How would you like to accept your invitation?
+</h4>
+<br />
+<div style="width: 160px;float: left;background-color: blanchedalmond;margin: 10px;padding: 10px;">
+  <%= link_to('Create a profile', invite_token_new_user_path(:portal_id => @portal.id, :token => @invite_token.token),:class => "lost-pwd", :style => "color: #15ADFF;") %>
+</div>
+<div style="width: 160px;float: left;background-color: blanchedalmond;margin: 10px;padding: 10px;">
+  <%= link_to('Login and confirm', invite_token_login_user_path(:portal_id => @portal.id, :token => @invite_token.token),:class => "lost-pwd", :style => "color: #15ADFF;") %>
+</div>
+<div style="width: 300px;float: left;background-color: blanchedalmond;margin: 10px;padding: 10px;">
+  &nbsp;<%= link_to('Accept as '+current_user.email, accept_invite_token_path(:portal_id => @portal.id, :token => @invite_token.token),:class => "lost-pwd", :style => "color: #15ADFF;")  if current_user %>
+</div>
+<br/><br/>
+<div style="width:100%;float: left;"></div>

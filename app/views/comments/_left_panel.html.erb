@@ -1,0 +1,66 @@
+<% @portal.all_users.each do|portal_user| %>
+  <div style="width: 100%; float: left;margin: 5px;">
+    <div style="width: 30px; float: left;">
+      <% if portal_user.facebook_uid %>
+        <%= fb_profile_pic(portal_user.facebook_uid, {:size => 'square' }) %>
+      <% else %>
+        <%= image_tag "missing.png" %>
+      <% end %>
+    </div>
+    <div style="width: 200px; float: left;margin-left: 5px;margin-top: 10px;">
+      <%= "#{portal_user.username.to_s}"  "#{@portal.is_owner?(portal_user) ? ' - Administrator' : ''}"  %>
+    </div>
+    <% unless portal_user.bill_users.blank? %>
+      <div style="border: 1px solid silver;float:left; width:230px;height: auto;padding: 5px;margin-bottom: 5px;margin-top: 5px;">
+        <div style="width: 100%; float: left;background-color: wheat;border-bottom: 1px solid gray;">
+          <div style="width: 70px; float: left;font-weight: bold;">
+            Name
+          </div>
+          <div style="width: 50px; float: left;font-weight: bold;">
+            Status
+          </div>
+          <div style="width: 60px; float: left;font-weight: bold;">
+            $ Due
+          </div>
+          <div style="width: 49px; float: left;font-weight: bold;">
+            Paid
+          </div>
+          <div style="float: left;width: 100%;">
+            <%= link_to "Click here to view bills", user_all_bills_path(:id => @portal.id) %>
+          </div>
+        </div>
+
+        <% portal_user.bill_users.find_all_by_portal_id(@portal.id).each do |bill_user| %>
+
+          <div style="width: 100%; float: left;padding-bottom: 5px;">
+            <div style="width: 70px; float: left;font-weight: bold;">
+              <%= bill_user.bill.name %>
+            </div>
+            <div style="width: 50px; float: left;font-weight: bold;">
+              <%= bill_user.status %>
+            </div>
+            <div style="width: 60px; float: left;font-weight: bold;">
+              $<%= bill_user.amount_due %>
+            </div>
+            <div style="width: 49px; float: left;font-weight: bold;">
+              $<%= bill_user.amount_paid %>
+            </div>
+          </div>
+          <div style="width: 100%; float: left;border-bottom: 1px solid gray;padding-bottom: 5px;">
+            <%= bill_user.bill.description %>
+          </div>
+
+        <% end %>
+      </div>
+    <% else %>
+      <div style="width: 100%; float: left;background-color: wheat;border-bottom: 1px solid gray;">
+        Bill List
+      </div>
+      <div style="width: 100%; float: left;border-bottom: 1px solid gray;padding-bottom: 5px;">
+        Do not have any bill.
+      </div>
+    <% end %>
+
+  </div>
+<% end %>
+

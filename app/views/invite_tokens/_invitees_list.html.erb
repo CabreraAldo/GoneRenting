@@ -1,0 +1,37 @@
+<div style="width:100%;float: left;margin-top: 20px;">
+  <% unless portal.invite_tokens.blank? %>
+    <div style="width:100%; float:left;background-color: lightsteelblue;font-weight: bold;padding: 5px 0px 5px 5px;">
+      Following users are associate with this portal.
+    </div>
+    <div style="width:100%; float:left;">
+      <table width="100%" cellpadding="5" cellspacing="5" >
+        <tr>
+          <th>E-mail</th>
+          <th>Portal Name</th>
+          <th>Status</th>
+          <th>Invitation Sent At</th>
+          <th>Remove Invited User</th>
+        </tr>
+
+        <% portal.invite_tokens.each do |invite_token| %>
+          <tr>
+            <td><%= invite_token.email %></td>
+            <td><%= portal.name %></td>
+            <td><%= invite_token.is_accepted == true ? "Accepted" : "Pending" %></td>
+            <td><%= invite_token.created_at.strftime("%m/%d/%Y") %></td>
+            <td><%= link_to "Remove", invite_token_path(:id => invite_token.id, :portal_id => invite_token.portal_id), :confirm => 'Are you sure?', :method => :delete %></td>
+    <%#= link_to_remote "Resend", :url => send_invitation_path(:email_address => user.email, :plan_id => @plan.id), :confirm => "Are you sure to resend invitation?" %>
+
+
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  <% else %>
+    <b>
+      <i>
+        No User is Associate with this portal yet!.
+      </i>
+    </b>
+  <% end %>
+</div>

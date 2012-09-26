@@ -1,0 +1,55 @@
+<div style="width:100%;float: left;">
+  <h2>
+    List of Bills for <b style="color: silver;"><%= @portal.name %></b>
+  </h2>
+</div>
+<span style="float: right;margin-right: 32px;margin-top: -100px;">
+  <%= link_to image_tag("back_button.jpeg"), portal_path(:id => @portal.id ) %>
+</span>
+
+<div class="dashboard_box" style="height: 30px;margin: 0px;">
+  <span style="margin-left: 68px;margin-top: 5px;">
+    <%= link_to 'Add Bills', new_bill_path(:id => @portal.id) %>
+  </span>
+</div>
+
+<div style="width:100%;float: left;margin-top: 20px;">
+  <% unless @bills.blank? %>
+    <div style="width:100%; float:left;background-color: lightsteelblue;font-weight: bold;padding: 5px 0px 5px 5px;">
+      Following bills are associate with this portal.
+    </div>
+    <div style="width:100%; float:left;">
+      <table width="100%" cellpadding="5" cellspacing="5" >
+        <tr style="background-color: wheat;">
+          <th>Bill Name</th>
+          <th>Due Date</th>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>Status</th>
+          <th>Operations</th>
+        </tr>
+
+        <% @bills.each do |bill| %>
+          <tr>
+            <td><%= bill.name %></td>
+            <td><%= bill.due.strftime("%m/%d/%Y") %></td>
+            <td><%= bill.bill_type %></td>
+            <td><%= bill.amount %></td>
+            <td><%= bill.status %></td>
+            <td>
+              <%= link_to "Edit", edit_bill_path(:id => @portal.id,:bill_id => bill.id) %>
+              /<%= link_to "Archive", edit_bill_path(:id => @portal.id,:bill_id => bill.id) %>
+              /<%= link_to "Delete", bill_path(:id => @portal.id,:bill_id => bill.id), :confirm => 'Are you sure?', :method => :delete %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  <% else %>
+    <b>
+      <i>
+        There is no bill in this portal, yet!. <%= link_to 'Please add new bill', new_bill_path(:id => @portal.id) %>
+      </i>
+    </b>
+  <% end %>
+</div>

@@ -1,0 +1,48 @@
+<div style="width: 100%; float: left;height: auto;background-color: wheat;margin-top: 30px;">
+  <% unless portal_users.blank? %>
+    <div style="width: 100%; float: left;background-color: papayawhip;">
+      <div style="width: 120px; float: left;   margin-left: 10px;">
+        Name
+      </div>
+      <div style="width: 120px; float: left;">
+        Amount Due
+      </div>
+
+      <div style="width: 120px; float: left;display: <%= (params[:action] == 'edit' or params[:action] == "update") ? 'block' : 'none' %>">
+        Amount Paid
+      </div>
+
+      <div style="width: 70px; float: left;margin-right: 10px;">
+        Status
+      </div>
+
+    </div>
+
+    <% portal_users.each do |portal_user| %>
+      <% bill_user = portal_user.bill_user(bill) %>
+      <% fields_for :bill_user, bill_user do |bu|%>
+        <div style="width: 100%; float: left;padding: 10px;">
+          <div style="width: 120px; float: left;">
+            <%= "#{portal_user.username.to_s}"  "#{portal.is_owner?(portal_user) ? '(Admin)' : ''}"  %>
+          </div>
+          <div style="width: 120px; float: left;">
+            <%= text_field_tag "bill_user[amount_due_#{portal_user.id}]", bill_user.amount_due , :style => "width:100px;"%>
+          </div>
+
+          <div style="width: 120px; float: left;display: <%= (params[:action] == 'edit' or params[:action] == "update") ? 'block' : 'none' %>">
+            <%= text_field_tag "bill_user[amount_paid_#{portal_user.id}]", bill_user.amount_paid , :style => "width:100px;" %>
+          </div>
+          <div style="width: 70px; float: left;">
+            <%= bill_user.status %>
+          </div>
+        </div>
+      <%end%>
+    <% end %>
+  <% else %>
+    <div style="width: 100%; float: left;padding: 10px;">
+      <i>
+        No User is yet associated with this portal
+      </i>
+    </div>
+  <% end %>
+</div>

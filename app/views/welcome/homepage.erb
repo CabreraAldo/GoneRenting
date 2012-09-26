@@ -1,0 +1,36 @@
+<%= render :partial => "header" %>
+<div style="float: right;">
+  <b>
+    <%= link_to "Create a New Portal", new_portal_path %>
+  </b>
+</div>
+
+
+
+<h1 style="margin: 25px;height: auto;float: left;margin-left: 100px;">
+  <% unless current_user.get_all_portals.blank? %>
+    <% current_user.get_all_portals.each do |portal| %>
+      <div style="float: left;width: 100%;margin: 10px;">
+        <div style="float: left;width: auto;">
+          <%= image_tag("right_arrow.jpeg", :style => "width:80px;") %>
+        </div>
+        <div style="float: left;width: auto;padding-top: 33px;">
+          <%= portal.name %>
+        </div>
+        <div style="float: left;width: auto;padding-top: 33px;">
+          &nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;<%= link_to 'View the Portal', comments_path(:id => portal.id, :class_name=>portal.class) %>
+        </div>
+        <div style="float: left;width: auto;padding-top: 33px;">
+          <% if portal.is_owner?(current_user) %>
+            &nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;<%= link_to 'Modify the Portal', dashboard_url(:portal_name => portal.name, :id => portal.id ) %>
+          <% else %>
+            &nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;Modify the Portal
+          <% end %>
+
+        </div>
+      </div>
+    <%end%>
+  <% else %>
+    No Portal Created Yet!
+  <% end %>
+</h1>

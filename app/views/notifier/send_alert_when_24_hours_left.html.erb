@@ -1,0 +1,26 @@
+<br/>
+<%= @bill.name %> – Is Due in 24 hours!
+
+<br/>
+
+<b>
+  The following bill is due in 24 hours!
+</b>
+
+<br/>
+Name of the Bill: <b><%= @bill.name %></b>
+<br/>
+
+Amount: <b>$<%= @amount_due %></b>
+<br/>
+
+Due Date: <b><%= @bill.due.strftime("%m/%d/%Y") %></b>
+<br/>
+
+Added by: <b><%= @creator.username %></b>
+<br/>
+
+
+
+The GoneRenting Team
+

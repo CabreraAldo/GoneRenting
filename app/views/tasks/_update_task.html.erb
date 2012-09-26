@@ -1,0 +1,17 @@
+<% remote_form_for :task,@task, :url=>{:controller=>"tasks" , :action=>"update_task", :id=>@object.id , :class_name => @object.class, :task_id => @task.id} do |f| %>
+
+
+  <div style="float:left;width:100%;">
+    <%= f.text_area :name , :size => "28x2" %>
+  </div>
+
+
+  <div style="float:right;width:100%;text-align: right;margin-top: 10px;">
+    <%= f.hidden_field :user_id , :value=>current_user.id %>
+
+    <%= f.submit "Update task", :style => "background-color: lightslategrey;width: 140px;color: white;"  %>
+
+  </div>
+
+<%end%>
+

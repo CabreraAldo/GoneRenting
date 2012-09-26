@@ -1,0 +1,48 @@
+<%= render :partial => 'accept_invite_tabs' %>
+
+<% form_for @user, :url => invite_token_create_user_path do |f| %>
+  <%= f.error_messages %>
+  <div style="float: left; width: 100%;">
+    <p>
+    <h4>
+      This is my first time using GoneRenting or I would like to create a new profile.
+    </h4>
+  </p>
+  </div>
+
+
+  <%= hidden_field_tag :portal_id, @portal.id %>
+
+  <div style="width:100%;float: left;padding-left: 50px;">
+    <div style="width:150px;float: left;">
+      <%= f.label :username, "Username" %>
+    </div>
+    <div style="width:750px;float: left;margin-bottom: 5px;">
+      <%= f.text_field :username %>
+    </div>
+    <div style="width:150px;float: left;">
+      <%= f.label :email %>
+    </div>
+    <div style="width:750px;float: left;margin-bottom: 5px;">
+      <%= f.text_field :email %>
+    </div>
+    <div style="width:150px;float: left;">
+      <%= f.label :password %>
+    </div>
+    <div style="width:750px;float: left;margin-bottom: 15px;">
+      <%= f.password_field :password %>
+    </div>
+    <div style="width:150px;float: left;">
+      <%= f.label :password_confirmation %>
+    </div>
+    <div style="width:750px;float: left;margin-bottom: 15px;">
+      <%= f.password_field :password_confirmation %>
+    </div>
+
+    <div style="width:750px;float: left;margin-bottom: 5px;text-align: center;">
+      <%= f.submit "Create profile & accept Invitation", :style => "background-color: lightslategrey;width: 240px;color: white;" %>
+    </div>
+
+  </div>
+
+<% end %>

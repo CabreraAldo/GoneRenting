@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  amount: 1.5
+  type: MyString
+  description: MyText
+  due: 2011-04-22 16:39:23
+  is_archived: false
+
+two:
+  name: MyString
+  amount: 1.5
+  type: MyString
+  description: MyText
+  due: 2011-04-22 16:39:23
+  is_archived: false

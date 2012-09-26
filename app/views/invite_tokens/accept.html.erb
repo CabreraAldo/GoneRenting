@@ -1,0 +1,7 @@
+<h1>Thank you.</h1>
+
+You now have access to the GoneRenting portal <%= @portal.name %>.
+
+<hr />
+
+<%= link_to "Portal dashboard", dashboard_url(:portal_name => @portal.name, :id => @portal.id ) %>

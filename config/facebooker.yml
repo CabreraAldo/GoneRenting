@@ -1,0 +1,10 @@
+development:
+  app_id: 165592873499050
+  secret: cab126af765f79b8c449ecc1cfc6af73
+  api_key: 0258d7e91ce6cbc06c5630c106c695f7
+
+production:
+  app_id: 165592873499050
+  secret: cab126af765f79b8c449ecc1cfc6af73
+  api_key: 0258d7e91ce6cbc06c5630c106c695f7
+

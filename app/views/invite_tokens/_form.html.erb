@@ -1,0 +1,23 @@
+<div style="float:left;width: 100%;">
+  <% form_for invite_token do |f| %>
+
+    <div style="float: left;width:100%;">
+      <%= error_messages_for :invite_token  %>
+    </div>
+    <%= hidden_field_tag :portal_id, @invite_token.portal_id %>
+    <div style="float: left;width:100%;">
+      <div style="float: left;width:100%;">
+        Enter email address to invite someone to this Portal.
+      </div>
+      <div style="float: left;width:100%;margin-top: 10px;">
+        <%= f.text_field :email %>
+      </div>
+    </div>
+
+    <div style="float: left;width:100%;margin-top: 10px;">
+      <%= f.submit "Send Invitation", :style => "background-color: lightslategrey;width: 140px;color: white;" %>
+    </div>
+
+  <% end %>
+
+</div>

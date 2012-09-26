@@ -1,0 +1,22 @@
+<div style="width:100%;float: left;">
+  <h2>
+    Add a new bill
+  </h2>
+</div>
+<span style="float: right;margin-right: 32px;margin-top: -100px;">
+  <%= link_to image_tag("back_button.jpeg"), bills_path(:id => @portal.id) %>
+</span>
+<div style="width:100%;float: left;">
+
+  <% form_for :bill, @bill, :url => {:controller => "bills", :action => "create", :id => @portal.id} do |f|%>
+    <%= error_messages_for :bill %>
+
+    <%= render :partial => "form", :locals => {:f => f, :portal => @portal} %>
+
+    <div style="margin: 10px;float: right;">
+      <%= f.submit "Create Bill", :style => "background-color: lightslategrey;width: 140px;color: white;" %>
+    </div>
+
+  <% end %>
+
+</div>

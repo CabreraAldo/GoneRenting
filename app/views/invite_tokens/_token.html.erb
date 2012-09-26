@@ -1,0 +1,14 @@
+<div class="invite_token">
+
+  <strong><%= token.email %></strong> - <%= token.token %> - <%= link_to "link", account_accept_invite_path(token.token) %>
+
+  <% if token.role == "admin" %>
+    <br /><span style="background-color: red;">This user is an admin and can access everything</span>
+  <% else %>
+    <ul>
+      <% token.projects.each do |project| %>
+        <li><%= project.name %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

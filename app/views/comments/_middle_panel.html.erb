@@ -1,0 +1,43 @@
+<div style="width: 100%;float: left; font-weight: bold;">
+  <h1>
+    <%= @portal.name %>
+  </h1>
+</div>
+
+<div class="slideshow" style="height: 200px;float: left; text-align: center; margin-left: 100px; width: 100%; margin-top: 10px;">
+  <% @portal.avatars.each do |avatar| %>
+    <%= link_to( image_tag(avatar.photo.url(:medium)), avatar.photo.url(:original) ) %>
+  <% end %>
+</div>
+<div style="float: left;width: 100%;margin-bottom: 10px;">
+  <div style="float: left;width: 75px;">
+    <b>
+      Description:
+    </b>
+  </div>
+  <div style="float: left;width: 335px;margin-left: 10px;text-align: left;">
+    <%= @portal.description %>
+  </div>
+</div>
+<div style="float: left;width: 100%;margin-bottom: 10px;">
+  <div style="float: left;width: 75px;">
+    <b>
+      Amenities:
+    </b>
+  </div>
+  <div style="float: left;width: 335px;margin-left: 10px;text-align: left;">
+    <ul style="text-align: left; width: 335px; list-style: square outside none;margin: 0px;margin-left: 10px;padding: 0px;">
+      <% @portal.amenities.collect(&:name).each do |amenity_name| %>
+      <li style="float: left;width: 150px;">
+        <%= amenity_name %>
+      </li>
+      <% end %>
+    </ul>    
+  </div>
+</div>
+
+
+
+<div style="float: left;width: 100%;">
+  <%= render :partial => "/comments/new_comment" %>
+</div>

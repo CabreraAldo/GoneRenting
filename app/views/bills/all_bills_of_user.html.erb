@@ -1,0 +1,49 @@
+<div style="width:100%;float: left;">
+  <h2>
+    List of Bills for <b style="color: silver;"><%= current_user.username %></b>
+  </h2>
+</div>
+<span style="float: right;margin-right: 32px;margin-top: -100px;">
+  <%= link_to image_tag("back_button.jpeg"), comments_path(:id => @portal.id, :class_name=>@portal.class) %>
+</span>
+
+<div style="width:100%;float: left;margin-top: 20px;">
+  <% unless current_user.all_bills(@portal).blank? %>
+    <div style="width:100%; float:left;background-color: lightsteelblue;font-weight: bold;padding: 5px 0px 5px 5px;">
+      Following bills are associate with You.
+    </div>
+    <div style="width:100%; float:left;">
+      <table width="100%" cellpadding="5" cellspacing="5" >
+        <tr style="background-color: wheat;">
+          <th>Bill Name</th>
+          <th>Due Date</th>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>Your Share</th>
+          <th>Status</th>
+          <th>Pay Bill</th>
+        </tr>
+
+        <% current_user.all_bills(@portal).each do |bill_user| %>
+          <tr>
+            <% bill = bill_user.bill %>
+            <td><%= bill.name %><br/><%= bill.description %></td>
+            <td><%= bill.due.strftime("%m/%d/%Y") %></td>
+            <td><%= bill.bill_type %></td>
+            <td><%= bill.amount %></td>
+            <td><%= bill_user.amount_due %></td>
+            <td><%= bill.status %></td>
+            <td><%= link_to_function "PayPal/WePay" %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  <% else %>
+    <b>
+      <i>
+        There is no bill for you for current portal, yet!. <%= @portal.name %>
+      </i>
+    </b>
+  <% end %>
+</div>
+

@@ -1,0 +1,17 @@
+<% remote_form_for :comment, :url=>{:controller=>"comments" , :action=>"add_comment", :id=>@object.id , :class_name => @object.class} do |f| %>
+
+  
+  <div style="float:left;width:100%;">
+    <%= f.text_area :comment , :size => "51x3" %>
+  </div>
+
+
+  <div style="float:right;width:100%;text-align: right;margin-top: 10px;">
+    <%= f.hidden_field :user_id , :value=>current_user.id %>
+
+    <%= f.submit "Add Comment", :style => "background-color: lightslategrey;width: 140px;color: white;"  %>
+
+  </div>
+
+<%end%>
+

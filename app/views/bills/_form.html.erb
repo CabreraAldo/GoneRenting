@@ -1,0 +1,117 @@
+<%= f.hidden_field :portal_id, :value => portal.id %>
+<div style="width: 100%;float: left;padding: 10px;">
+  <div style="width: 100%;float: left;margin-top: 5px;">
+    <div style="float: left; width: 200px;">
+      Bill Name
+    </div>
+    <div style="float: left; width: 400px;">
+      <%= f.text_field :name, :style => "width:440px;" %>
+    </div>
+  </div>
+
+  <div style="width: 100%;float: left;margin-top: 5px;">
+    <div style="float: left; width: 200px;">
+      Bill Amount
+    </div>
+    <div style="float: left; width: 400px;">
+      <%= f.text_field :amount, :style => "width:440px;" %>
+    </div>
+  </div>
+
+  <div style="width: 100%;float: left;margin-top: 5px;">
+    <div style="float: left; width: 200px;">
+      Bill Type
+    </div>
+    <div style="float: left; width: 400px;">
+      <%= select_tag "bill[bill_type]", options_for_select([["Rent" , "Rent"],["Utility" ,"Utility"] , ["Food", "Food"], ["Misc","Misc"]], @bill.bill_type)   %>
+    </div>
+  </div>
+
+  <div style="width: 100%;float: left;margin-top: 5px;">
+    <div style="float: left; width: 200px;">
+      Bill Description
+    </div>
+    <div style="float: left; width: 400px;">
+      <%= f.text_area :description, :size => "60x3" %>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function(){
+      Date.firstDayOfWeek = 0;
+      Date.format = 'yyyy-mm-dd';
+
+      if($('#bill_due').val() == ""){
+        $('#bill_due').datePicker({startDate:'1996-01-01'}).val(new Date().asString()).trigger('change');
+      }else{
+        $('#bill_due').datePicker({startDate:'1996-01-01'});
+      }
+    });
+  </script>
+
+  <div style="width: 100%;float: left;margin-top: 5px;">
+    <div style="float: left; width: 200px;">
+      Bill Due
+    </div>
+    <div style="float: left; width: 400px;">
+      <%= f.text_field :due %>
+    </div>
+  </div>
+
+  <div style="width: 100%;float: left;margin-top: 15px;">
+    <div style="float: left; width: 200px;">
+      How to Bill the Users
+    </div>
+    <div style="float: left; width: 450px;">
+
+      <span style="float: left;">
+        <%= radio_button_tag "bill_division", "equal", true,
+          :disabled => (params[:action] == "new" or params[:action] == "create") ? false : true,
+          :onclick => remote_function(:url => {:controller => "bills", :action =>"fetch_portal_users", :id => portal.id , :bill_id => @bill.id},
+          :with => "'fetch_user=' + $('#bill_division_different').attr('checked')")  %>
+      </span>
+      <span style="float: left;">
+        &nbsp;Divide it Equally
+      </span>
+      <span style="float: left;">
+        <%= radio_button_tag "bill_division", "different", (params[:action] == "new" or params[:action] == "create") ? false : true,
+          :onclick => params[:action] == "new" ? remote_function(:url => {:controller => "bills", :action =>"fetch_portal_users", :id => portal.id , :bill_id => @bill.id },
+          :with => "'fetch_user='+ $('#bill_division_different').attr('checked')") : ""  %>
+      </span>
+      <span style="float: left;">
+        &nbsp;Different Amounts for different Users
+      </span>
+      <span id="portal_users" style="float: left; width: 100%;">
+        <% unless (params[:action] == "new" or params[:action] == "create") %>
+          <%= render :partial => "portal_users", :locals => {:portal_users => @portal_users, :portal => @portal, :bill => @bill} %>
+        <% end %>
+      </span>
+    </div>
+  </div>
+  <% unless params[:action] == "edit" or params[:action] == "update" %>
+    <div style="width: 100%;float: left;margin-top: 15px;">
+      <div style="float: left; width: 200px;">
+        Send E-mail Reminder?
+      </div>
+      <div style="float: left; width: 450px;">
+
+        <span style="float: left;">
+          <%= radio_button_tag "notification", "yes", true %>
+        </span>
+        <span style="float: left;">
+          &nbsp;Yes E-mail them !
+        </span>
+        <span style="float: left;">
+          <%= radio_button_tag "notification", "no", false%>
+        </span>
+        <span style="float: left;">
+          &nbsp;Nope I'll let them know!
+        </span>
+      </div>
+    </div>
+  <% end %>
+
+
+
+
+</div>

@@ -1,0 +1,21 @@
+<div style="width:100%;float: left;">
+  <h2>
+    Update Portal
+  </h2>
+</div>
+<span style="float: right;margin-right: 32px;margin-top: -100px;">
+  <%= link_to image_tag("back_button.jpeg"), homepage_url %>
+</span>
+<% form_for(@portal, :html => { :multipart => true }) do |f|%>
+  <%= error_messages_for :portal %>
+
+  <%= render :partial => "form", :locals => {:f => f} %>
+
+  <div style="margin: 10px;float: right;">
+    <%=  link_to "Cancel", homepage_path %>
+  </div>
+  <div style="margin: 10px;float: right;">
+    <%=  f.submit "Finish", :class => "bt_login"%>
+  </div>
+
+<% end %>

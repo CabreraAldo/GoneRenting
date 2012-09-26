@@ -1,0 +1,16 @@
+<% remote_form_for :user_session, @user_session, :url => user_session_create_path do |f| %>
+
+  <h1>Member Login</h1>
+  <div id="errors_div_session">
+    <%= render :partial => "layouts/errors", :locals => {:object => @user_session}%>
+  </div>
+
+  <label class="grey" for="log">Username:</label>
+  <%= f.text_field :username, :class=>"field", :size => "23" %>
+  <label class="grey" for="pwd">Password:</label>
+  <%= f.password_field :password, :class=>"field", :size => "23" %>
+  <label><input name="rememberme" id="rememberme" type="checkbox" checked="checked" value="forever" /> &nbsp;Remember me</label>
+  <div class="clear"></div>
+  <%= f.submit "Submit", :class => "bt_login" %>
+  <%= link_to "Lost your password?", forgot_password_path,:class => "lost-pwd" %>
+<% end %>

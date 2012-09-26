@@ -1,0 +1,12 @@
+<div style="width:100%;float: left;">
+  <%= render :partial => "welcome/header" %>
+  <h2>
+    Invite Someone
+  </h2>
+</div>
+<span style="float: right;margin-right: 32px;margin-top: -100px;">
+  <%= link_to image_tag("back_button.jpeg"), dashboard_url(:portal_name => @portal.name, :id => @portal.id ) %>
+</span>
+
+<%= render :partial => 'invite_tokens/form', :locals => { :portal => @portal, :invite_token => @invite_token } %>
+<%= render :partial => 'invite_tokens/invitees_list', :locals => { :portal => @portal } %>

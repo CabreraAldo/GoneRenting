@@ -1,0 +1,81 @@
+NameVirtualHost *:80
+<VirtualHost *:80>
+  ServerName www.myvouchercodes4u.co.uk
+  #ServerAlias voucherstreasure.com voucherstreasure.co.uk www.voucherstreasure.com
+  redirect permanent / http://www.voucherstreasure.co.uk/
+</VirtualHost>
+
+<VirtualHost *:80>
+  ServerName    www.uaetrades.com
+  ServerAlias uaetrades.com
+  DocumentRoot /var/www/uaetraders/public/
+</VirtualHost>
+
+<VirtualHost *:80>
+  DocumentRoot /var/www/financeplan/public/
+  ServerName fplan.voucherstreasure.co.uk
+</VirtualHost>
+
+<VirtualHost *:80>
+  DocumentRoot /var/www/futureplan/public/
+  ServerName futureplan.voucherstreasure.co.uk
+</VirtualHost> 
+
+
+<VirtualHost *:80>
+	ServerAdmin webmaster@localhost
+	ServerName www.voucherstreasure.co.uk
+	ServerAlias voucherstreasure.com voucherstreasure.co.uk www.voucherstreasure.com	
+#	DocumentRoot /var/www/
+        DocumentRoot /var/www/MyVoucherCodes4U/public/
+	<Directory />
+		Options FollowSymLinks
+		AllowOverride None
+	</Directory>
+	<Directory /var/www/>
+		Options Indexes FollowSymLinks MultiViews
+		AllowOverride None
+		Order allow,deny
+		allow from all
+	</Directory>
+
+	ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
+	<Directory "/usr/lib/cgi-bin">
+		AllowOverride None
+		Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+		Order allow,deny
+		Allow from all
+	</Directory>
+
+	ErrorLog /var/log/apache2/error.log
+
+	# Possible values include: debug, info, notice, warn, error, crit,
+	# alert, emerg.
+	LogLevel warn
+
+	CustomLog /var/log/apache2/access.log combined
+	ServerSignature On
+
+    Alias /doc/ "/usr/share/doc/"
+    <Directory "/usr/share/doc/">
+        Options Indexes MultiViews FollowSymLinks
+        AllowOverride None
+        Order deny,allow
+        Deny from all
+        Allow from 127.0.0.0/255.0.0.0 ::1/128
+    </Directory>
+
+</VirtualHost>
+
+
+#<VirtualHost *:80>
+#	ServerName www.imapsolutions.co.uk
+#	DocumentRoot /var/www/
+#</VirtualHost>
+<VirtualHost *:80>
+  ServerName    www.imapsolutions.co.uk
+  ServerAlias imapsolutions.co.uk
+  DocumentRoot /var/www/imap/public/
+</VirtualHost>
+
+
